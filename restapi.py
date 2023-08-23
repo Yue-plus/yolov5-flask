@@ -1,5 +1,5 @@
 """
-Run a rest API exposing the yolov5s object detection model
+Run a rest API exposing the YOLOv5s object detection model
 """
 import argparse
 import io
@@ -22,8 +22,9 @@ def predict():
         image_file = request.files["image"]
         image_bytes = image_file.read()
         img = Image.open(io.BytesIO(image_bytes))
-        results = model(img, size=640) # reduce size=320 for faster inference
+        results = model(img, size=640)  # reduce size=320 for faster inference
         return results.pandas().xyxy[0].to_json(orient="records")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Flask api exposing yolov5 model")
